@@ -22,6 +22,9 @@ services:
   oidc-keycloak:
     container_name: oidc-keycloak
     image: quay.io/keycloak/keycloak:16.1.1
+    command:
+      - "-b=0.0.0.0"
+      - "-bmanagement=0.0.0.0"
     environment:
       KEYCLOAK_USER: oidc-admin-user
       KEYCLOAK_PASSWORD: oidc-admin-password
@@ -32,6 +35,8 @@ services:
       DB_USER: oidc_keycloak
       DB_PASSWORD: oidc-keycloak-password
       JDBC_PARAMS:
+    volumes:
+      - "./docker/oidc-keycloak/scripts:/opt/jboss/startup-scripts"
     ports:
       - "8080:8080"
       - "9990:9990"
