@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  sql-database:
+    container_name: sql-database
+    image: postgres:14.1
+    environment:
+      POSTGRES_USER: oidc-db-admin
+      POSTGRES_PASSWORD: oidc-db-password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - "./docker/oidc-sql-database-init:/docker-entrypoint-initdb.d"
+      - "./docker/oidc-sql-database-mounted:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    networks:
+      oidc-network:
+        aliases:
+          - sql-database
+          - sql-database.local
+
+  oidc-keycloak:
+    container_name: oidc-keycloak
+    image: quay.io/keycloak/keycloak:16.1.1
+    environment:
+      KEYCLOAK_USER: oidc-admin-user
+      KEYCLOAK_PASSWORD: oidc-admin-password
+      DB_VENDOR: postgres
+      DB_ADDR: sql-database.local
+      DB_PORT: 5432
+      DB_DATABASE: oidc_keycloak
+      DB_USER: oidc_keycloak
+      DB_PASSWORD: oidc-keycloak-password
+      JDBC_PARAMS:
+    ports:
+      - "8080:8080"
+    networks:
+      oidc-network:
+        aliases:
+          - oidc-keycloak.local
+          - oidc-keycloak
+    depends_on:
+      - sql-database
+
+networks:
+  oidc-network:
