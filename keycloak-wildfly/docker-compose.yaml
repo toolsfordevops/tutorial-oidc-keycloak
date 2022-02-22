@@ -34,6 +34,7 @@ services:
       JDBC_PARAMS:
     ports:
       - "8080:8080"
+      - "9990:9990"
     networks:
       oidc-network:
         aliases:
