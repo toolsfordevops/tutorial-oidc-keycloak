@@ -7,4 +7,6 @@ $ROOT_FOLDER/keycloak-wildfly/stop-infra.sh && \
 rm -rf "$ROOT_FOLDER/keycloak-wildfly/docker/oidc-sql-database-mounted"
 
 
-# $ROOT_FOLDER/keycloak-wildfly/start-infra.sh
+if [[ "x$1" == "xstart" ]]; then
+  $ROOT_FOLDER/keycloak-wildfly/start-infra.sh
+fi
