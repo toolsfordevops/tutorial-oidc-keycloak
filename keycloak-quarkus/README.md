@@ -1,10 +1,11 @@
 # Tutorial for Keycloak based on Quarkus
 
-### Setup local keycloak with docker and docker-compose
+## Setup local keycloak with docker and docker-compose
 
 In the [docker-compose.yaml](./docker-compose.yaml):
+
 * PostgreSQL Database is defined
-* Keyloack 17.0 is defined
+* Keyloack is defined
 * [start-infra](./start-infra.sh) will start up the environment
 * [stop-infra](./stop-infra.sh) will stop the environment
 * [reset-infra](./reset-infra.sh) will stop and delete the environment
