@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   sql-database:
-    container_name: sql-database
+    container_name: kw-sql-database
     image: postgres:14.1
     environment:
       POSTGRES_USER: oidc-db-admin
@@ -10,7 +10,7 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - "./docker/oidc-sql-database-init:/docker-entrypoint-initdb.d"
-      - "./docker/oidc-sql-database-mounted:/var/lib/postgresql/data"
+      - "kw-sql-database:/var/lib/postgresql/data"
     ports:
       - "5432:5432"
     networks:
@@ -20,8 +20,8 @@ services:
           - sql-database.local
 
   oidc-keycloak:
-    container_name: oidc-keycloak
-    image: quay.io/keycloak/keycloak:17.0.0-legacy
+    container_name: kw-oidc-keycloak
+    image: quay.io/keycloak/keycloak:18.0.2-legacy
     command:
       - "-b=0.0.0.0"
       - "-bmanagement=0.0.0.0"
@@ -50,3 +50,6 @@ services:
 
 networks:
   oidc-wildfly-network:
+
+volumes:
+  kw-sql-database:
