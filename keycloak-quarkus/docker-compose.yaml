@@ -21,9 +21,9 @@ services:
 
   oidc-keycloak:
     container_name: kq-oidc-keycloak
-    image: quay.io/keycloak/keycloak:18.0.2
+    image: quay.io/keycloak/keycloak:19.0.0
     command:
-      - --config-file /opt/tool4devops/oidc/keycloak.conf start-dev --auto-build --db=postgres --features=preview # start-dev does not require https
+      - --config-file /opt/tool4devops/oidc/keycloak.conf start-dev --auto-build --db=postgres # start-dev does not require https
     environment:
       KEYCLOAK_ADMIN: oidc-admin-user
       KEYCLOAK_ADMIN_PASSWORD: oidc-admin-password
