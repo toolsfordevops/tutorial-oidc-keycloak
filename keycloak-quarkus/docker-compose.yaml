@@ -21,7 +21,7 @@ services:
 
   oidc-keycloak:
     container_name: kq-oidc-keycloak
-    image: quay.io/keycloak/keycloak:19.0.0
+    image: quay.io/keycloak/keycloak:20.0.1
     command:
       - --config-file /opt/tool4devops/oidc/keycloak.conf start-dev --auto-build --db=postgres # start-dev does not require https
     environment:
